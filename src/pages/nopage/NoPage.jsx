@@ -23,7 +23,7 @@ const NoPage = () => {
           <div className="m-auto w-80">
           <button
             type="button"
-            onClick={() => (window.location.href = "/allproducts")}
+            onClick={() => (window.location.href = "/")}
             className="m-auto focus:outline-none text-white focus:ring-3 focus:ring-white font-medium rounded-lg text-md w-80 py-2 mb-5"
             style={{
               backgroundColor: theme === "dark" ? "#3D0C11" : "#538cfc",
