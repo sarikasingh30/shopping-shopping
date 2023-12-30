@@ -1,17 +1,15 @@
 import React, { useContext } from 'react'
 import MyContext from '../../context/data/MyContext'
 import Layout from '../../components/layout/Layout'
-import Loader from '../../components/loader/Loader'
+
 
 function Order() {
   const userid = JSON.parse(localStorage.getItem('user')).user.uid
   const context = useContext(MyContext)
-  const { theme, loading, order } = context
+  const { theme,order } = context
   return (
     <Layout>
-      {loading && <Loader />}
-      {order.length > 0 ?
-        (<>
+      {(order.length===0)?
           <div className="pt-10 w-95% m-auto">
             {
               order.filter(obj => obj.userid === userid).map((order) => {
@@ -39,27 +37,23 @@ function Order() {
                 )
               })
             }
-          </div>
-        </>)
-        :
-        (
+          </div>:
           <div className="mt-5 mx-auto max-w-5xl justify-center px-2 md:flex md:space-x-6 xl:px-0 mb-5">
-            <div className="m-auto w-90">
-              <img 
-                src="https://charatoon.com/photo/thum/3775.png"
-                alt="No Order"
-              />
-            </div>
-            <div className="p-5 flex-col align-center justify-center"><h2 className="mb-10 text-center text-4xl font-bold">No Order Found</h2>
-            <button  type="button"
-                        onClick={()=>window.location.href="/allproducts"}
-                        className="focus:outline-none text-white focus:ring-3 focus:ring-white font-medium rounded-lg text-sm w-full py-2 mb-5"
-                        style={{
-                          backgroundColor:
-                            theme === "dark" ? "#3D0C11" : "#538cfc",
-                        }}>Please Order</button></div>
+          <div className="m-auto w-90">
+            <img 
+              src="https://charatoon.com/photo/thum/3775.png"
+              alt="No Order"
+            />
           </div>
-        )
+          <div className="p-5 flex-col align-center justify-center"><h2 className="mb-10 text-center text-4xl font-bold">No Order Found</h2>
+          <button  type="button"
+                      onClick={()=>window.location.href="/allproducts"}
+                      className="focus:outline-none text-white focus:ring-3 focus:ring-white font-medium rounded-lg text-sm w-full py-2 mb-5"
+                      style={{
+                        backgroundColor:
+                          theme === "dark" ? "#3D0C11" : "#538cfc",
+                      }}>Please Order</button></div>
+        </div>
 
       }
     </Layout>
