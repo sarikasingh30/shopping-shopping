@@ -7,10 +7,11 @@ import { toast } from "react-toastify";
 import { collection, addDoc } from "firebase/firestore";
 import { fireDB } from "../../firebase/FirebaseConfig";
 import { deleteFromCart } from "../../redux/cartSlice";
+import Loader from "../../components/loader/Loader";
 
 const Cart = () => {
   const context = useContext(MyContext);
-  const { theme } = context;
+  const { theme,loading} = context;
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
   const [total, setTotal] = useState(0);
@@ -123,6 +124,7 @@ const Cart = () => {
     <Layout>
       <div className="pt-5 " style={{ color: theme === "dark" ? "white" : "" }}>
         <h1 className="mb-10 text-center text-3xl font-bold">Cart Items</h1>
+        {loading && <Loader/>}
         {cartItems?.length === 0 ? (
           <div className="mx-auto max-w-5xl justify-center px-2 md:flex md:space-x-6 xl:px-0 mb-5">
             <div className="m-auto w-80">

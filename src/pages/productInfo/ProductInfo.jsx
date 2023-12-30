@@ -8,10 +8,11 @@ import { doc, getDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
+import Loader from "../../components/loader/Loader";
 
 export const ProductInfo = () => {
   const context = useContext(MyContext);
-  const { theme, setLoading } = context;
+  const { theme, setLoading,loading } = context;
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
   const params = useParams();
@@ -48,6 +49,8 @@ export const ProductInfo = () => {
   return (
     <Layout>
       <section className="text-gray-600 body-font overflow-hidden">
+      {loading && <Loader/>}
+
         <div className="container px-5 py-32 mx-auto">
           {pro && (
             <div className="lg:w-4/5 mx-auto flex flex-wrap">
