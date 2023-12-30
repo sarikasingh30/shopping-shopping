@@ -7,7 +7,7 @@ export default function Footer() {
     const context = useContext(MyContext)
     const {theme} = context
     return (
-        <footer className="text-gray-600 body-font bg-gray-300" style={{backgroundColor:theme==="dark"?"#3D0C11":"#538cfc", color: theme === 'dark' ? 'white' : '', }}>
+        <footer className="text-gray-600 body-font" style={{backgroundColor:theme==="dark"?"#3D0C11":"#538cfc", color: theme === 'dark' ? 'white' : '', }}>
             <div className="container px-5 py-24 mx-auto" >
                 <div className="flex flex-wrap md:text-left text-center order-first">
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">

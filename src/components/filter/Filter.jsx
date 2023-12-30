@@ -3,7 +3,7 @@ import myContext from '../../context/data/MyContext'
 
 function Filter() {
     const context = useContext(myContext)
-    const { theme } = context
+    const { theme,filterPrice, setFilterPrice, filterType, setFilterType, searchkey, setSearchkey,products} = context
 
     return (
         <div>
@@ -24,29 +24,39 @@ function Filter() {
                             name="searchkey"
                             id="searchkey"
                             placeholder="Search here"
+                            value={searchkey}
+                            onChange={(e)=>setSearchkey(e.target.value)}
                             className="px-8 py-3 w-full rounded-md bg-violet-0 border-transparent outline-0 text-sm" style={{ backgroundColor: theme === 'dark' ? '#EBE3D5' : '', color: theme === 'dark' ? 'grey' : 'black', }} />
                     </div>
                     <div className="flex items-center justify-between mt-4">
                         <p className="font-medium">
                             Filters
                         </p>
-                        <button className="px-4 py-2 bg-gray-50hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md" style={{ color: theme === 'dark' ? 'white' : '' }}>
+                        <button onClick={()=>{setSearchkey("");setFilterPrice("");setFilterType("")}}className="px-4 py-2 bg-gray-50hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md" style={{ color: theme === 'dark' ? 'white' : '' }}>
                             Reset Filter
                         </button>
                     </div>
                     <div>
                         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-                            <select className="px-4 py-3 w-full rounded-md bg-gray-50 border-transparent outline-0 focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" style={{ backgroundColor: theme === 'dark' ? '#EBE3D5' : '', color: theme === 'dark' ? 'grey' : '', }}>
-                                <option value="jacket">Jacket</option>
-                                <option value="shirt">shirt</option>
-                                <option value="mobile">mobile</option>
-                                <option value="jacket">Jacket</option>
+                            <select className="px-4 py-3 w-full rounded-md bg-gray-50 border-transparent outline-0 focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" style={{ backgroundColor: theme === 'dark' ? '#EBE3D5' : '', color: theme === 'dark' ? 'grey' : '', }}
+                            value={filterType}
+                            onChange={(e)=>setFilterType(e.target.value)}>
+                                <option value=""></option>
+                                {products?.map((el,index)=>{
+                                    return(
+                                        <option value={el.category} key={index}>{el.category}</option>
+                                    )
+                                })}
                             </select>
-                            <select className="px-4 py-3 w-full rounded-md bg-gray-50 border-transparent outline-0  focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" style={{ backgroundColor: theme === 'dark' ? '#EBE3D5' : '', color: theme === 'dark' ? 'grey' : '', }}>
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="300">300</option>
-                                <option value="400">400</option>
+                            <select className="px-4 py-3 w-full rounded-md bg-gray-50 border-transparent outline-0  focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" style={{ backgroundColor: theme === 'dark' ? '#EBE3D5' : '', color: theme === 'dark' ? 'grey' : '', }}
+                            value={filterPrice}
+                            onChange={(e)=>setFilterPrice(e.target.value)}>
+                                <option value=""></option>
+                                {products?.map((el,index)=>{
+                                    return(
+                                        <option value={el.price} key={index}>{el.price}</option>
+                                    )
+                                })}
                             </select>
 
                         </div>

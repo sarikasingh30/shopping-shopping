@@ -5,14 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom"
 import MyState from './context/data/MyState';
-
+import { store } from './redux/store';
+import { Provider } from 'react-redux';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Provider store={store}>
   <MyState>
   <BrowserRouter>
     <App />
+    <ToastContainer/>
   </BrowserRouter>
   </MyState>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
