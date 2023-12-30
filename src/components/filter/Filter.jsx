@@ -5,6 +5,23 @@ function Filter() {
     const context = useContext(myContext)
     const { theme,filterPrice, setFilterPrice, filterType, setFilterType, searchkey, setSearchkey,products} = context
 
+    const filteredProCat = products.reduce((acc, current) => {
+        const x = acc.find(item => item.category === current.category);
+        if (!x) {
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
+      const filteredProPri= products.reduce((acc, current) => {
+        const x = acc.find(item => item.price === current.price);
+        if (!x) {
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
+
     return (
         <div>
            <div className=' container mx-auto px-4 mt-5 '>
@@ -42,7 +59,7 @@ function Filter() {
                             value={filterType}
                             onChange={(e)=>setFilterType(e.target.value)}>
                                 <option value=""></option>
-                                {products?.map((el,index)=>{
+                                {filteredProCat?.map((el,index)=>{
                                     return(
                                         <option value={el.category} key={index}>{el.category}</option>
                                     )
@@ -52,7 +69,7 @@ function Filter() {
                             value={filterPrice}
                             onChange={(e)=>setFilterPrice(e.target.value)}>
                                 <option value=""></option>
-                                {products?.map((el,index)=>{
+                                {filteredProPri?.map((el,index)=>{
                                     return(
                                         <option value={el.price} key={index}>{el.price}</option>
                                     )
